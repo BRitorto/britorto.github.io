@@ -1,14 +1,21 @@
 import InviteeForm from './InviteeForm';
-import Box from '@mui/material/Box';
+import { ReactComponent as Invitation } from './invitation.svg';
+import Stack from '@mui/material/Stack';
+
 
 import './App.css';
 
 function App() {
+  const invitationStyle = {
+    height: 700,
+  };
+
   return (
     <div className="App" >
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+      <Stack spacing={4} sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+        <Invitation style={invitationStyle} />
         <InviteeForm></InviteeForm>
-      </Box>
+      </Stack>
     </div>
   );
 }
