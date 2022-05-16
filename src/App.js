@@ -30,7 +30,7 @@ function App() {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <div>
+          <div style={{ width: '100%' }}>
             <Invitation style={invitationStyle} />
           </div>
           <div>
