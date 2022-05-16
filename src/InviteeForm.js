@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import { FormControl } from '@mui/material';
+import { FormControl, Grid } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import Stack from '@mui/material/Stack';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
@@ -15,7 +14,7 @@ export default function InviteeForm() {
     const [name, setName] = useState();
     const [lastName, setLastName] = useState();
     const [mail, setMail] = useState();
-    const [attend, setAttend] = useState();
+    const [attend, setAttend] = useState('yes');
 
     const submit = (e) => {
         e.preventDefault();
@@ -26,8 +25,8 @@ export default function InviteeForm() {
     }
 
     return (
-        <Stack spacing={2}>
-            <Stack direction="row" spacing={2}>
+        <Grid container justifyContent="center" alignItems="center" spacing={3}>
+            <Grid item xs={12} sm={3}>
                 <FormControl>
                     <InputLabel required htmlFor="name">Nombre</InputLabel>
                     <OutlinedInput
@@ -39,6 +38,8 @@ export default function InviteeForm() {
                         autoFocus
                     />
                 </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={3}>
                 <FormControl>
                     <InputLabel required htmlFor="lastName">Apellido</InputLabel>
                     <OutlinedInput
@@ -49,6 +50,8 @@ export default function InviteeForm() {
                         required
                     />
                 </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={3}>
                 <FormControl>
                     <InputLabel required htmlFor="mail">Mail</InputLabel>
                     <OutlinedInput
@@ -59,8 +62,8 @@ export default function InviteeForm() {
                         required
                     />
                 </FormControl>
-            </Stack>
-            <Stack justifyContent="center" direction="row" spacing={4}>
+            </Grid>
+            <Grid item xs={12}>
                 <FormControl>
                     <FormLabel id="attending">¿Asistirás?</FormLabel>
                     <RadioGroup
@@ -74,10 +77,10 @@ export default function InviteeForm() {
                         <FormControlLabel value="no" control={<Radio />} label="No" />
                     </RadioGroup>
                 </FormControl>
-            </Stack>
-            <div>
-                <Button type="submit" size="medium" variant="contained" onClick={submit}>Submit</Button>
-            </div>
-        </Stack>
+            </Grid>
+            <Grid item xs={12}>
+                <Button type="submit" size="large" variant="contained" onClick={submit}>Submit</Button>
+            </Grid>
+        </Grid>
     );
 }
