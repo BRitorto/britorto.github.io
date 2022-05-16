@@ -26,8 +26,8 @@ export default function InviteeForm() {
 
     return (
         <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid item xs={12} sm={3}>
-                <FormControl>
+            <Grid item xs={8} sm={3}>
+                <FormControl fullWidth>
                     <InputLabel required htmlFor="name">Nombre</InputLabel>
                     <OutlinedInput
                         id="name"
@@ -39,8 +39,8 @@ export default function InviteeForm() {
                     />
                 </FormControl>
             </Grid>
-            <Grid item xs={12} sm={3}>
-                <FormControl>
+            <Grid item xs={8} sm={3}>
+                <FormControl fullWidth>
                     <InputLabel required htmlFor="lastName">Apellido</InputLabel>
                     <OutlinedInput
                         id="lastName"
@@ -51,8 +51,8 @@ export default function InviteeForm() {
                     />
                 </FormControl>
             </Grid>
-            <Grid item xs={12} sm={3}>
-                <FormControl>
+            <Grid item xs={8} sm={3}>
+                <FormControl fullWidth>
                     <InputLabel required htmlFor="mail">Mail</InputLabel>
                     <OutlinedInput
                         id="mail"
@@ -78,8 +78,8 @@ export default function InviteeForm() {
                     </RadioGroup>
                 </FormControl>
             </Grid>
-            <Grid item xs={12}>
-                <Button type="submit" size="large" variant="contained" onClick={submit}>Submit</Button>
+            <Grid item xs={8} sm={4}>
+                <Button fullWidth type="submit" size="large" variant="outlined" onClick={submit}>Submit</Button>
             </Grid>
         </Grid>
     );
