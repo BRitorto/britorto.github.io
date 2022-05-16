@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FormControl, Grid } from '@mui/material';
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -29,19 +29,32 @@ const invitationStyle = {
 
 export default function PartyInviteForm() {
     const [attend, setAttend] = useState('yes');
-    const params = useParams();
-    const json = base64_decode(params.invitationHash);
+    const [searchParams] = useSearchParams();
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+    const [plusOne, setPlusOne] = useState(null);
+
+    const decodeData = () => {
+        const json = base64_decode(searchParams.get('data'));
+        if (json) {
+            try {
+                const person = JSON.parse(json);
+                //console.log(person);
+                setFirstName(person.firstName);
+                setLastName(person.lastName);
+                setPlusOne(person.plusOne)
+            } catch (e) {
+                alert("Tienes mal el link");
+            }
+        }
+    }
+
+    useEffect(() => {
+        decodeData()
+    })
 
     const submit = (e) => {
         e.preventDefault();
-        console.log("hola");
-        /*console.log(name);
-        console.log(lastName);
-        console.log(mail);
-        console.log(attend);*/
-        const st = base64_decode('eyJuYW1lIjoiQmlhbmNhIiwibGFzdE5hbWUiOiJSaXRvcnRvIiwicGx1c09uZSI6dHJ1ZX0');
-        console.log(st);
-        console.log(params);
     }
 
     return (
@@ -59,8 +72,10 @@ export default function PartyInviteForm() {
                     <div>
                         <Grid container justifyContent="center" alignItems="center" spacing={3}>
                             <Grid item xs={12}>
-                                <p>{json}</p>
+                                <p>{firstName}</p>
+                                <p>{lastName}</p>
                                 <p>Fuiste invitado</p>
+                                {plusOne ? <p>Con plus one</p> : null}
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl>

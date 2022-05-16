@@ -10,7 +10,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/invitation/:invitationHash" element={<PartyInviteForm />} />
+      <Route path="/invitation" element={<PartyInviteForm />} />
     </Routes >
   </BrowserRouter >
 );
