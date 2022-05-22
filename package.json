@@ -1,6 +1,7 @@
 {
   "name": "project-grey",
   "homepage": "https://britorto.github.io/",
+  "proxy": "https://v3vwjf4yod.execute-api.sa-east-1.amazonaws.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "base-64": "^1.0.0",
     "gh-pages": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -44,6 +46,6 @@
     ]
   },
   "devDependencies": {
-    "@types/base-64": "^1.0.0"
+    "base-64": "^1.0.0"
   }
 }

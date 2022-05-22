@@ -3,7 +3,6 @@ body, html {
   background-color: #14213d;
   color: #c8c8c8;;
   font-family: 'Avenir Next Condensed Ultra Light';
-  line-height: 0.5em;
 }
 
 .App {
@@ -22,12 +21,18 @@ body, html {
   margin-right: auto;
 }
 
+p {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .timePlaceText {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .invitationText {
-  font-size: 30px;
+  font-size: 25px;
+  margin-top: 3rem;
 }
 
 .App-logo {
@@ -36,7 +41,7 @@ body, html {
 }
 
 .label {
-  font-size: 25px !important;
+  font-size: 20px !important;
   font-family: 'Avenir Next Condensed Ultra Light' !important;
   color: #c8c8c8 !important;
 }

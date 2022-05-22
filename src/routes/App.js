@@ -28,32 +28,57 @@ export default function App() {
     const [attend, setAttend] = useState('yes');
     const [plusOneAttend, setPlusOneAttend] = useState('yes');
     const [searchParams] = useSearchParams();
+    const [id, setId] = useState(null);
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [plusOne, setPlusOne] = useState(null);
     const [incorrectPayload, setIncorrectPayload] = useState(false);
+    const [success, setSuccess] = useState(null);
 
     const decodeData = () => {
-        const json = base64_decode(searchParams.get('i'));
-        if (json) {
+        const data = base64_decode(searchParams.get('i'));
+        if (data) {
             try {
-                const person = JSON.parse(json);
-                setFirstName(person.f);
-                setLastName(person.l);
-                setPlusOne(person.p)
+                const person = data.split(",", 4);
+                if (person.length !== 4) {
+                    setIncorrectPayload(true);
+                }
+                setId(person[0]);
+                setFirstName(person[1]);
+                setLastName(person[2]);
+                setPlusOne(person[3]);
             } catch (e) {
                 setIncorrectPayload(true);
             }
         }
     }
 
+    const submit = async (e) => {
+        e.preventDefault();
+        const data = {
+            "operation": "update",
+            "id": id,
+            "first_name": firstName,
+            "last_name": lastName,
+            "plus_one": plusOneAttend === "yes",
+            "assists": attend === "yes"
+        };
+        const response = await fetch("/default/rsvpLambda",
+            {
+                method: "POST",
+                headers: {
+                    "content_type": "application/json; charset=utf-8",
+                    "X-API-Key": "8Zdq5EMWeB6Wj8MyygW379zc6zMhox3SdOCvYHnd"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json());
+        setSuccess(response.success);
+    }
+
     useEffect(() => {
         decodeData()
     })
-
-    const submit = (e) => {
-        e.preventDefault();
-    }
 
     const getInviteForm = () => {
         return (
@@ -113,6 +138,22 @@ export default function App() {
 
     }
 
+    const getSuccessMessage = () => {
+        return <Grid container justifyContent="center" alignItems="center" spacing={3}>
+            <Grid className="timePlaceText" item xs={12}>
+                <p>¡Tu respuesta fue guardada correctamente!</p>
+            </Grid>
+        </Grid>;
+    }
+
+    const getErrorMessage = () => {
+        return <Grid container justifyContent="center" alignItems="center" spacing={3}>
+            <Grid className="timePlaceText" item xs={12}>
+                <p>¡Tu respuesta fue guardada correctamente!</p>
+            </Grid>
+        </Grid>;
+    }
+
     return (
         <ThemeProvider theme={darkTheme}>
             <div className="App" >
@@ -125,7 +166,11 @@ export default function App() {
                     <div style={{ width: '100%' }}>
                         <Invitation className='invitationStyle' />
                     </div>
-                    <div> {incorrectPayload === true ? getIncorrectPayloadMessage() : getInviteForm()}
+                    <div> {
+                        success === null ?
+                            (incorrectPayload === true ? getIncorrectPayloadMessage() : getInviteForm()) :
+                            (success ? getSuccessMessage() : getErrorMessage())
+                    }
                     </div>
                 </Stack>
             </div>
