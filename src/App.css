@@ -1,12 +1,33 @@
 body, html {
   overflow-x: hidden;
   background-color: #14213d;
-  color: white;
+  color: #c8c8c8;;
+  font-family: 'Avenir Next Condensed Ultra Light';
+  line-height: 0.5em;
 }
 
 .App {
   text-align: center;
   padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invitationStyle {
+  min-height: 200px;
+  max-height: 400px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: auto;
+}
+
+.timePlaceText {
+  font-size: 40px;
+}
+
+.invitationText {
+  font-size: 30px;
 }
 
 .App-logo {
@@ -14,21 +35,16 @@ body, html {
   pointer-events: none;
 }
 
+.label {
+  font-size: 25px !important;
+  font-family: 'Avenir Next Condensed Ultra Light' !important;
+  color: #c8c8c8 !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
