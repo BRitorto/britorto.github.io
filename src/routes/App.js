@@ -62,7 +62,7 @@ export default function App() {
             "id": id,
             "first_name": firstName,
             "last_name": lastName,
-            "plus_one": plusOneAttend === "yes",
+            "plus_one": plusOne && plusOneAttend === "yes",
             "assists": attend === "yes"
         };
         const response = await fetch(serverUrl + "/default/rsvpLambda",
@@ -150,10 +150,10 @@ export default function App() {
 
     const getSuccessMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="timePlaceText" item xs={12}>
+            <Grid className="timePlaceText" item xs={8} sm={12}>
                 <p>¡Tu respuesta fue guardada correctamente!</p>
             </Grid >
-            <Grid item xs={8} sm={4}>
+            <Grid item xs={6} sm={8}>
                 <Button fullWidth size="large" variant="outlined" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20220714T230000Z%2F20220715T050000Z&details=Festejo%20Juan%20%26%20Bian%0AElegante%20sport&location=Victoria%20Brown%2C%20Costa%20Rica%204827%2C%20C1414%20CABA%2C%20Argentina&text=J%26B">Agregar a Calendar</Button>
             </Grid>
         </Grid >;
@@ -161,7 +161,7 @@ export default function App() {
 
     const getErrorMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="timePlaceText" item xs={12}>
+            <Grid className="timePlaceText" item xs={8} sm={12}>
                 <p>Ocurrió un error guardando tu respuesta. Intenta de nuevo</p>
             </Grid>
         </Grid>;
