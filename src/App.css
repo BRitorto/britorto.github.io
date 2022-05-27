@@ -21,6 +21,10 @@ body, html {
   margin-right: auto;
 }
 
+Button {
+  font-weight: 900 !important;
+}
+
 p {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;

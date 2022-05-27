@@ -25,6 +25,7 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
+    const serverUrl = "https://v3vwjf4yod.execute-api.sa-east-1.amazonaws.com";
     const [attend, setAttend] = useState('yes');
     const [plusOneAttend, setPlusOneAttend] = useState('yes');
     const [searchParams] = useSearchParams();
@@ -34,6 +35,7 @@ export default function App() {
     const [plusOne, setPlusOne] = useState(null);
     const [incorrectPayload, setIncorrectPayload] = useState(false);
     const [success, setSuccess] = useState(null);
+    const [plusOneDisabled, setPlusOneDisabled] = useState(false);
 
     const decodeData = () => {
         const data = base64_decode(searchParams.get('i'));
@@ -63,17 +65,26 @@ export default function App() {
             "plus_one": plusOneAttend === "yes",
             "assists": attend === "yes"
         };
-        const response = await fetch("/default/rsvpLambda",
+        const response = await fetch(serverUrl + "/default/rsvpLambda",
             {
                 method: "POST",
                 headers: {
-                    "content_type": "application/json; charset=utf-8",
+                    "content-type": "application/json; charset=utf-8",
                     "X-API-Key": "8Zdq5EMWeB6Wj8MyygW379zc6zMhox3SdOCvYHnd"
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                mode: "cors"
             })
             .then(response => response.json());
         setSuccess(response.success);
+    }
+
+    const disablePlusOne = () => {
+        setPlusOneDisabled(true);
+    }
+
+    const enablePlusOne = () => {
+        setPlusOneDisabled(false);
     }
 
     useEffect(() => {
@@ -89,7 +100,7 @@ export default function App() {
                     <p>Elegante Sport</p>
                 </Grid>
                 <Grid item xs={12}>
-                    <p className="invitationText"><strong>{firstName}{' '}{lastName}</strong>, te queríamos invitar a nuestro casamiento</p>
+                    <p className="invitationText"><strong>{firstName}</strong>, te queríamos invitar a nuestro casamiento</p>
                 </Grid>
                 <Grid item xs={12}>
                     <FormControl>
@@ -100,12 +111,12 @@ export default function App() {
                             defaultValue="yes"
                             value={attend}
                             onChange={e => setAttend(e.target.value)} >
-                            <FormControlLabel value="yes" control={<Radio />} label="Si" sx={{ fontSize: '30px' }} />
-                            <FormControlLabel value="no" control={<Radio />} label="No" className="label" />
+                            <FormControlLabel value="yes" control={<Radio />} label="Si" sx={{ fontSize: '30px' }} onClick={enablePlusOne} />
+                            <FormControlLabel value="no" control={<Radio />} label="No" className="label" onClick={disablePlusOne} />
                         </RadioGroup>
                     </FormControl>
                 </Grid>
-                {plusOne ? (
+                {plusOne === 'true' ? (
                     <Grid item xs={12}>
                         <FormControl>
                             <FormLabel className="label" id="plusOneAttending"><p>¿Y tu plus one?</p></FormLabel>
@@ -115,14 +126,14 @@ export default function App() {
                                 defaultValue="yes"
                                 value={plusOneAttend}
                                 onChange={e => setPlusOneAttend(e.target.value)} >
-                                <FormControlLabel value="yes" control={<Radio />} label="Si" />
-                                <FormControlLabel value="no" control={<Radio />} label="No" />
+                                <FormControlLabel value="yes" control={<Radio />} label="Si" disabled={plusOneDisabled} />
+                                <FormControlLabel value="no" control={<Radio />} label="No" disabled={plusOneDisabled} />
                             </RadioGroup>
                         </FormControl>
                     </Grid>)
                     : null}
                 <Grid item xs={8} sm={4}>
-                    <Button sx={{ marginTop: '30px' }} fullWidth type="submit" size="large" variant="outlined" onClick={submit}>Submit</Button>
+                    <Button sx={{ marginTop: '30px' }} fullWidth type="submit" size="large" variant="outlined" onClick={submit}>Enviar</Button>
                 </Grid>
             </Grid >
         );
@@ -132,7 +143,6 @@ export default function App() {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
             <Grid className="timePlaceText" item xs={12}>
                 <p>Evento privado</p>
-                <p>Pediles el link de la invitación a los organizadores</p>
             </Grid>
         </Grid>;
 
@@ -142,14 +152,17 @@ export default function App() {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
             <Grid className="timePlaceText" item xs={12}>
                 <p>¡Tu respuesta fue guardada correctamente!</p>
+            </Grid >
+            <Grid item xs={8} sm={4}>
+                <Button fullWidth size="large" variant="outlined" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20220714T230000Z%2F20220715T050000Z&details=Festejo%20Juan%20%26%20Bian%0AElegante%20sport&location=Victoria%20Brown%2C%20Costa%20Rica%204827%2C%20C1414%20CABA%2C%20Argentina&text=J%26B">Agregar a Calendar</Button>
             </Grid>
-        </Grid>;
+        </Grid >;
     }
 
     const getErrorMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
             <Grid className="timePlaceText" item xs={12}>
-                <p>¡Tu respuesta fue guardada correctamente!</p>
+                <p>Ocurrió un error guardando tu respuesta. Intenta de nuevo</p>
             </Grid>
         </Grid>;
     }
