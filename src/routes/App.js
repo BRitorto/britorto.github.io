@@ -8,7 +8,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import { ReactComponent as Invitation } from '../titulo2.svg';
-import Stack from '@mui/material/Stack';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import '../App.css';
 import { decode as base64_decode } from 'base-64';
@@ -99,7 +98,7 @@ export default function App() {
                     <p>8:00 PM</p>
                     <p>Elegante sport</p>
                 </Grid>
-                <Grid item xs={8} sm={12}>
+                <Grid item xs={6} sm={12}>
                     <p className="invitationText"><strong>{firstName}</strong>, te queríamos invitar a nuestro casamiento</p>
                 </Grid>
                 <Grid item xs={12}>
@@ -132,7 +131,7 @@ export default function App() {
                         </FormControl>
                     </Grid>)
                     : null}
-                <Grid item xs={8} sm={4}>
+                <Grid item xs={4} sm={4}>
                     <Button sx={{ marginTop: '30px' }} fullWidth type="submit" size="large" variant="outlined" onClick={submit}>Enviar</Button>
                 </Grid>
             </Grid >
@@ -150,7 +149,7 @@ export default function App() {
 
     const getSuccessMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="timePlaceText" item xs={8} sm={12}>
+            <Grid className="invitationText" item xs={8} sm={12}>
                 <p>¡Tu respuesta fue guardada correctamente!</p>
             </Grid >
             <Grid item xs={6} sm={8}>
@@ -161,7 +160,7 @@ export default function App() {
 
     const getErrorMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="timePlaceText" item xs={8} sm={12}>
+            <Grid className="invitationText" item xs={8} sm={12}>
                 <p>Ocurrió un error guardando tu respuesta.</p>
                 <p>Intenta de nuevo.</p>
             </Grid>
@@ -171,22 +170,22 @@ export default function App() {
     return (
         <ThemeProvider theme={darkTheme}>
             <div className="App" >
-                <Stack spacing={0} sx={{
+                <Grid container spacing={0} sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <div style={{ width: '100%' }}>
+                    <Grid item xs={12} sm={12}>
                         <Invitation className='invitationStyle' />
-                    </div>
+                    </Grid>
                     <div> {
                         success === null ?
                             (incorrectPayload === true ? getIncorrectPayloadMessage() : getInviteForm()) :
                             (success ? getSuccessMessage() : getErrorMessage())
                     }
                     </div>
-                </Stack>
+                </Grid>
             </div>
         </ThemeProvider >
     );
