@@ -2,7 +2,7 @@ body, html {
   overflow-x: hidden;
   background-color: #14213d;
   color: #c8c8c8;;
-  font-family: 'Avenir Next Condensed Ultra Light';
+  font-family: 'Nunito', sans-serif;
 }
 
 .App {
@@ -14,15 +14,10 @@ body, html {
 }
 
 .invitationStyle {
-  min-height: 200px;
-  max-height: 400px;
+  height: 400px;
   margin-top: 0;
   margin-bottom: 0;
   margin-right: auto;
-}
-
-Button {
-  font-weight: 900 !important;
 }
 
 p {
@@ -46,7 +41,7 @@ p {
 
 .label {
   font-size: 20px !important;
-  font-family: 'Avenir Next Condensed Ultra Light' !important;
+  font-family: 'Nunito' !important;
   color: #c8c8c8 !important;
 }
 

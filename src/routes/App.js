@@ -7,7 +7,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import { ReactComponent as Invitation } from '../titulo.svg';
+import { ReactComponent as Invitation } from '../titulo2.svg';
 import Stack from '@mui/material/Stack';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import '../App.css';
@@ -19,7 +19,7 @@ const darkTheme = createTheme({
     },
     typography: {
         fontFamily: [
-            'Avenir Next Condensed Ultra Light'
+            'Nunito'
         ]
     }
 });
@@ -97,9 +97,9 @@ export default function App() {
                 <Grid className="timePlaceText" item xs={12}>
                     <p>Victoria Brown Bar</p>
                     <p>8:00 PM</p>
-                    <p>Elegante Sport</p>
+                    <p>Elegante sport</p>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={8} sm={12}>
                     <p className="invitationText"><strong>{firstName}</strong>, te queríamos invitar a nuestro casamiento</p>
                 </Grid>
                 <Grid item xs={12}>
@@ -141,7 +141,7 @@ export default function App() {
 
     const getIncorrectPayloadMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="timePlaceText" item xs={12}>
+            <Grid className="timePlaceText" item xs={12} sm={12}>
                 <p>Evento privado</p>
             </Grid>
         </Grid>;
@@ -162,7 +162,8 @@ export default function App() {
     const getErrorMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
             <Grid className="timePlaceText" item xs={8} sm={12}>
-                <p>Ocurrió un error guardando tu respuesta. Intenta de nuevo</p>
+                <p>Ocurrió un error guardando tu respuesta.</p>
+                <p>Intenta de nuevo.</p>
             </Grid>
         </Grid>;
     }
