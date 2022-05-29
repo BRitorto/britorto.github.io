@@ -98,7 +98,7 @@ export default function App() {
                     <p>8:00 PM</p>
                     <p>Elegante sport</p>
                 </Grid>
-                <Grid item xs={6} sm={12}>
+                <Grid item xs={9} sm={12}>
                     <p className="invitationText"><strong>{firstName}</strong>, te queríamos invitar a nuestro casamiento</p>
                 </Grid>
                 <Grid item xs={12}>
@@ -131,7 +131,7 @@ export default function App() {
                         </FormControl>
                     </Grid>)
                     : null}
-                <Grid item xs={4} sm={4}>
+                <Grid item xs={6} sm={4}>
                     <Button sx={{ marginTop: '30px' }} fullWidth type="submit" size="large" variant="outlined" onClick={submit}>Enviar</Button>
                 </Grid>
             </Grid >
@@ -149,7 +149,7 @@ export default function App() {
 
     const getSuccessMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="invitationText" item xs={8} sm={12}>
+            <Grid className="invitationText" item xs={9} sm={12}>
                 <p>¡Tu respuesta fue guardada correctamente!</p>
             </Grid >
             <Grid item xs={6} sm={8}>
@@ -160,7 +160,7 @@ export default function App() {
 
     const getErrorMessage = () => {
         return <Grid container justifyContent="center" alignItems="center" spacing={3}>
-            <Grid className="invitationText" item xs={8} sm={12}>
+            <Grid className="invitationText" item xs={9} sm={12}>
                 <p>Ocurrió un error guardando tu respuesta.</p>
                 <p>Intenta de nuevo.</p>
             </Grid>
